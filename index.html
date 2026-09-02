@@ -1,12 +1,15 @@
-
+```html
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>QuickKart - Grocery Delivery</title>
 
     <style>
+
         * {
             margin: 0;
             padding: 0;
@@ -19,14 +22,15 @@
             color: #222;
         }
 
-        /* Navbar */
+        /* ================= NAVBAR ================= */
+
         nav {
             height: 70px;
             background: white;
             display: flex;
             align-items: center;
             padding: 0 5%;
-            gap: 30px;
+            gap: 25px;
             border-bottom: 1px solid #eee;
             position: sticky;
             top: 0;
@@ -54,6 +58,19 @@
             color: #777;
             font-weight: normal;
             margin-top: 4px;
+        }
+
+        /* MENU */
+
+        .menu {
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .menu:hover {
+            color: #f5c400;
         }
 
         .search {
@@ -92,7 +109,8 @@
             cursor: pointer;
         }
 
-        /* Hero */
+        /* ================= HERO ================= */
+
         .hero {
             width: 90%;
             max-width: 1300px;
@@ -130,7 +148,8 @@
             font-size: 130px;
         }
 
-        /* Categories */
+        /* ================= CONTAINER ================= */
+
         .container {
             width: 90%;
             max-width: 1300px;
@@ -141,6 +160,8 @@
             font-size: 25px;
             margin: 35px 0 20px;
         }
+
+        /* ================= CATEGORIES ================= */
 
         .categories {
             display: grid;
@@ -172,7 +193,8 @@
             font-weight: bold;
         }
 
-        /* Products */
+        /* ================= PRODUCTS / MENU ================= */
+
         .products {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
@@ -238,7 +260,8 @@
             background: #f5c400;
         }
 
-        /* Footer */
+        /* ================= FOOTER ================= */
+
         footer {
             margin-top: 60px;
             background: #222;
@@ -271,8 +294,10 @@
             color: #aaa;
         }
 
-        /* Responsive */
+        /* ================= RESPONSIVE ================= */
+
         @media (max-width: 1000px) {
+
             .categories {
                 grid-template-columns: repeat(4, 1fr);
             }
@@ -287,6 +312,7 @@
         }
 
         @media (max-width: 650px) {
+
             nav {
                 padding: 0 15px;
                 gap: 10px;
@@ -329,53 +355,103 @@
                 font-size: 55px;
             }
         }
+
     </style>
+
 </head>
 
 <body>
 
-    <!-- Navbar -->
+
+    <!-- ================= NAVBAR ================= -->
+
     <nav>
-        <div class="logo">Quick<span>Kart</span></div>
+
+        <div class="logo">
+            Quick<span>Kart</span>
+        </div>
 
         <div class="location">
             📍 Deliver to
             <small>Vaijapur, Maharashtra</small>
         </div>
 
-        <div class="search">
-            <span class="search-icon">🔍</span>
-            <input type="text" id="searchInput"
-                   placeholder="Search for groceries, fruits, snacks...">
+        <!-- MENU -->
+        <div class="menu"
+             onclick="document.getElementById('menuSection').scrollIntoView({behavior:'smooth'})">
+
+            Menu
+
         </div>
 
-        <div class="login">Login</div>
+        <div class="search">
+
+            <span class="search-icon">🔍</span>
+
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Search for groceries, fruits, snacks..."
+            >
+
+        </div>
+
+        <div class="login">
+            Login
+        </div>
 
         <div class="cart">
-            🛒 Cart (<span id="cartCount">0</span>)
+
+            🛒 Cart
+            (<span id="cartCount">0</span>)
+
         </div>
+
     </nav>
 
 
-    <!-- Hero -->
+    <!-- ================= HERO ================= -->
+
     <section class="hero">
+
         <div class="hero-text">
-            <h1>Groceries delivered fast ⚡</h1>
-            <p>Fresh groceries, snacks & daily essentials at your doorstep.</p>
-            <button class="shop-btn"
-                    onclick="document.getElementById('products').scrollIntoView()">
+
+            <h1>
+                Groceries delivered fast ⚡
+            </h1>
+
+            <p>
+                Fresh groceries, snacks & daily essentials
+                at your doorstep.
+            </p>
+
+            <button
+                class="shop-btn"
+                onclick="document.getElementById('menuSection').scrollIntoView({behavior:'smooth'})">
+
                 Shop Now
+
             </button>
+
         </div>
 
-        <div class="hero-icon">🛍️</div>
+        <div class="hero-icon">
+            🛍️
+        </div>
+
     </section>
 
 
+    <!-- ================= MAIN ================= -->
+
     <main class="container">
 
-        <!-- Categories -->
-        <h2 class="section-title">Shop by Category</h2>
+
+        <!-- ================= CATEGORIES ================= -->
+
+        <h2 class="section-title">
+            Shop by Category
+        </h2>
 
         <div class="categories">
 
@@ -422,221 +498,534 @@
         </div>
 
 
-        <!-- Products -->
-        <h2 class="section-title" id="products">Popular Products</h2>
+        <!-- ================= MENU ================= -->
 
-        <div class="products" id="productList">
+        <h2
+            class="section-title"
+            id="menuSection">
 
-            <div class="product" data-name="Fresh Apples">
-                <div class="product-image">🍎</div>
-                <h3>Fresh Apples</h3>
-                <div class="quantity">1 kg</div>
+            Menu 🛒
+
+        </h2>
+
+
+        <div
+            class="products"
+            id="productList">
+
+
+            <!-- PRODUCT 1 -->
+
+            <div
+                class="product"
+                data-name="Fresh Apples">
+
+                <div class="product-image">
+                    🍎
+                </div>
+
+                <h3>
+                    Fresh Apples
+                </h3>
+
+                <div class="quantity">
+                    1 kg
+                </div>
 
                 <div class="product-bottom">
-                    <span class="price">₹120</span>
-                    <button class="add-btn" onclick="addToCart()">
+
+                    <span class="price">
+                        ₹120
+                    </span>
+
+                    <button
+                        class="add-btn"
+                        onclick="addToCart()">
+
                         ADD
+
                     </button>
+
                 </div>
+
             </div>
 
 
-            <div class="product" data-name="Banana">
-                <div class="product-image">🍌</div>
-                <h3>Fresh Banana</h3>
-                <div class="quantity">1 dozen</div>
+            <!-- PRODUCT 2 -->
+
+            <div
+                class="product"
+                data-name="Banana">
+
+                <div class="product-image">
+                    🍌
+                </div>
+
+                <h3>
+                    Fresh Banana
+                </h3>
+
+                <div class="quantity">
+                    1 dozen
+                </div>
 
                 <div class="product-bottom">
-                    <span class="price">₹60</span>
-                    <button class="add-btn" onclick="addToCart()">
+
+                    <span class="price">
+                        ₹60
+                    </span>
+
+                    <button
+                        class="add-btn"
+                        onclick="addToCart()">
+
                         ADD
+
                     </button>
+
                 </div>
+
             </div>
 
 
-            <div class="product" data-name="Milk">
-                <div class="product-image">🥛</div>
-                <h3>Fresh Milk</h3>
-                <div class="quantity">1 litre</div>
+            <!-- PRODUCT 3 -->
+
+            <div
+                class="product"
+                data-name="Milk">
+
+                <div class="product-image">
+                    🥛
+                </div>
+
+                <h3>
+                    Fresh Milk
+                </h3>
+
+                <div class="quantity">
+                    1 litre
+                </div>
 
                 <div class="product-bottom">
-                    <span class="price">₹58</span>
-                    <button class="add-btn" onclick="addToCart()">
+
+                    <span class="price">
+                        ₹58
+                    </span>
+
+                    <button
+                        class="add-btn"
+                        onclick="addToCart()">
+
                         ADD
+
                     </button>
+
                 </div>
+
             </div>
 
 
-            <div class="product" data-name="Potato">
-                <div class="product-image">🥔</div>
-                <h3>Potato</h3>
-                <div class="quantity">1 kg</div>
+            <!-- PRODUCT 4 -->
+
+            <div
+                class="product"
+                data-name="Potato">
+
+                <div class="product-image">
+                    🥔
+                </div>
+
+                <h3>
+                    Potato
+                </h3>
+
+                <div class="quantity">
+                    1 kg
+                </div>
 
                 <div class="product-bottom">
-                    <span class="price">₹40</span>
-                    <button class="add-btn" onclick="addToCart()">
+
+                    <span class="price">
+                        ₹40
+                    </span>
+
+                    <button
+                        class="add-btn"
+                        onclick="addToCart()">
+
                         ADD
+
                     </button>
+
                 </div>
+
             </div>
 
 
-            <div class="product" data-name="Biscuits">
-                <div class="product-image">🍪</div>
-                <h3>Chocolate Biscuits</h3>
-                <div class="quantity">200 g</div>
+            <!-- PRODUCT 5 -->
+
+            <div
+                class="product"
+                data-name="Biscuits">
+
+                <div class="product-image">
+                    🍪
+                </div>
+
+                <h3>
+                    Chocolate Biscuits
+                </h3>
+
+                <div class="quantity">
+                    200 g
+                </div>
 
                 <div class="product-bottom">
-                    <span class="price">₹30</span>
-                    <button class="add-btn" onclick="addToCart()">
+
+                    <span class="price">
+                        ₹30
+                    </span>
+
+                    <button
+                        class="add-btn"
+                        onclick="addToCart()">
+
                         ADD
+
                     </button>
+
                 </div>
+
             </div>
 
 
-            <div class="product" data-name="Rice">
-                <div class="product-image">🍚</div>
-                <h3>Premium Rice</h3>
-                <div class="quantity">5 kg</div>
+            <!-- PRODUCT 6 -->
+
+            <div
+                class="product"
+                data-name="Rice">
+
+                <div class="product-image">
+                    🍚
+                </div>
+
+                <h3>
+                    Premium Rice
+                </h3>
+
+                <div class="quantity">
+                    5 kg
+                </div>
 
                 <div class="product-bottom">
-                    <span class="price">₹350</span>
-                    <button class="add-btn" onclick="addToCart()">
+
+                    <span class="price">
+                        ₹350
+                    </span>
+
+                    <button
+                        class="add-btn"
+                        onclick="addToCart()">
+
                         ADD
+
                     </button>
+
                 </div>
+
             </div>
 
 
-            <div class="product" data-name="Orange Juice">
-                <div class="product-image">🧃</div>
-                <h3>Orange Juice</h3>
-                <div class="quantity">1 litre</div>
+            <!-- PRODUCT 7 -->
+
+            <div
+                class="product"
+                data-name="Orange Juice">
+
+                <div class="product-image">
+                    🧃
+                </div>
+
+                <h3>
+                    Orange Juice
+                </h3>
+
+                <div class="quantity">
+                    1 litre
+                </div>
 
                 <div class="product-bottom">
-                    <span class="price">₹110</span>
-                    <button class="add-btn" onclick="addToCart()">
+
+                    <span class="price">
+                        ₹110
+                    </span>
+
+                    <button
+                        class="add-btn"
+                        onclick="addToCart()">
+
                         ADD
+
                     </button>
+
                 </div>
+
             </div>
 
 
-            <div class="product" data-name="Tomato">
-                <div class="product-image">🍅</div>
-                <h3>Fresh Tomato</h3>
-                <div class="quantity">1 kg</div>
+            <!-- PRODUCT 8 -->
+
+            <div
+                class="product"
+                data-name="Tomato">
+
+                <div class="product-image">
+                    🍅
+                </div>
+
+                <h3>
+                    Fresh Tomato
+                </h3>
+
+                <div class="quantity">
+                    1 kg
+                </div>
 
                 <div class="product-bottom">
-                    <span class="price">₹50</span>
-                    <button class="add-btn" onclick="addToCart()">
+
+                    <span class="price">
+                        ₹50
+                    </span>
+
+                    <button
+                        class="add-btn"
+                        onclick="addToCart()">
+
                         ADD
+
                     </button>
+
                 </div>
+
             </div>
 
 
-            <div class="product" data-name="Bread">
-                <div class="product-image">🍞</div>
-                <h3>Fresh Bread</h3>
-                <div class="quantity">400 g</div>
+            <!-- PRODUCT 9 -->
+
+            <div
+                class="product"
+                data-name="Bread">
+
+                <div class="product-image">
+                    🍞
+                </div>
+
+                <h3>
+                    Fresh Bread
+                </h3>
+
+                <div class="quantity">
+                    400 g
+                </div>
 
                 <div class="product-bottom">
-                    <span class="price">₹45</span>
-                    <button class="add-btn" onclick="addToCart()">
+
+                    <span class="price">
+                        ₹45
+                    </span>
+
+                    <button
+                        class="add-btn"
+                        onclick="addToCart()">
+
                         ADD
+
                     </button>
+
                 </div>
+
             </div>
 
 
-            <div class="product" data-name="Eggs">
-                <div class="product-image">🥚</div>
-                <h3>Farm Eggs</h3>
-                <div class="quantity">12 pieces</div>
+            <!-- PRODUCT 10 -->
+
+            <div
+                class="product"
+                data-name="Eggs">
+
+                <div class="product-image">
+                    🥚
+                </div>
+
+                <h3>
+                    Farm Eggs
+                </h3>
+
+                <div class="quantity">
+                    12 pieces
+                </div>
 
                 <div class="product-bottom">
-                    <span class="price">₹90</span>
-                    <button class="add-btn" onclick="addToCart()">
+
+                    <span class="price">
+                        ₹90
+                    </span>
+
+                    <button
+                        class="add-btn"
+                        onclick="addToCart()">
+
                         ADD
+
                     </button>
+
                 </div>
+
             </div>
+
 
         </div>
 
     </main>
 
 
-    <!-- Footer -->
+    <!-- ================= FOOTER ================= -->
+
     <footer>
+
         <div class="footer-content">
 
             <div>
-                <h2>QuickKart</h2>
-                <p>Fast grocery delivery</p>
-                <p>Fresh products at your doorstep.</p>
+
+                <h2>
+                    QuickKart
+                </h2>
+
+                <p>
+                    Fast grocery delivery
+                </p>
+
+                <p>
+                    Fresh products at your doorstep.
+                </p>
+
             </div>
 
-            <div>
-                <h3>Company</h3>
-                <p>About Us</p>
-                <p>Contact</p>
-                <p>Careers</p>
-            </div>
 
             <div>
-                <h3>Help</h3>
-                <p>Customer Support</p>
-                <p>Delivery Information</p>
-                <p>Terms & Conditions</p>
+
+                <h3>
+                    Company
+                </h3>
+
+                <p>
+                    About Us
+                </p>
+
+                <p>
+                    Contact
+                </p>
+
+                <p>
+                    Careers
+                </p>
+
+            </div>
+
+
+            <div>
+
+                <h3>
+                    Help
+                </h3>
+
+                <p>
+                    Customer Support
+                </p>
+
+                <p>
+                    Delivery Information
+                </p>
+
+                <p>
+                    Terms & Conditions
+                </p>
+
             </div>
 
         </div>
+
 
         <div class="copyright">
-            © 2026 QuickKart. All Rights Reserved.
+
+            © 2026 QuickKart.
+            All Rights Reserved.
+
         </div>
+
     </footer>
 
 
+    <!-- ================= JAVASCRIPT ================= -->
+
     <script>
 
-        // Cart
+        /* CART */
+
         let cartCount = 0;
 
         function addToCart() {
+
             cartCount++;
-            document.getElementById("cartCount").innerText = cartCount;
+
+            document.getElementById("cartCount").innerText =
+                cartCount;
+
         }
 
 
-        // Product Search
-        document.getElementById("searchInput").addEventListener("input", function () {
+        /* SEARCH */
 
-            let search = this.value.toLowerCase();
+        document
+            .getElementById("searchInput")
+            .addEventListener("input", function () {
 
-            let products = document.querySelectorAll(".product");
+                let search =
+                    this.value.toLowerCase();
 
-            products.forEach(function(product) {
+                let products =
+                    document.querySelectorAll(".product");
 
-                let name = product.getAttribute("data-name").toLowerCase();
 
-                if (name.includes(search)) {
-                    product.style.display = "block";
-                } else {
-                    product.style.display = "none";
-                }
+                products.forEach(function (product) {
+
+                    let name =
+                        product
+                        .getAttribute("data-name")
+                        .toLowerCase();
+
+
+                    if (name.includes(search)) {
+
+                        product.style.display =
+                            "block";
+
+                    } else {
+
+                        product.style.display =
+                            "none";
+
+                    }
+
+                });
 
             });
 
-        });
-
     </script>
 
+
 </body>
+
 </html>
 ```
+

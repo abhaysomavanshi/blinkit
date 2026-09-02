@@ -1,0 +1,1391 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>QuickKart - Grocery Delivery</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:#f7f7f7;
+    color:#222;
+}
+
+/* NAVBAR */
+
+nav{
+    height:70px;
+    background:white;
+    display:flex;
+    align-items:center;
+    padding:0 5%;
+    gap:25px;
+    border-bottom:1px solid #eee;
+    position:sticky;
+    top:0;
+    z-index:100;
+}
+
+.logo{
+    font-size:28px;
+    font-weight:bold;
+    color:#f5c400;
+}
+
+.logo span{
+    color:#222;
+}
+
+.location{
+    font-size:14px;
+    font-weight:bold;
+}
+
+.location small{
+    display:block;
+    color:#777;
+    font-weight:normal;
+    margin-top:4px;
+}
+
+.menu{
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.search{
+    flex:1;
+    max-width:550px;
+}
+
+.search input{
+    width:100%;
+    padding:14px;
+    border:none;
+    background:#f2f2f2;
+    border-radius:10px;
+    outline:none;
+}
+
+.login{
+    cursor:pointer;
+}
+
+.cart{
+    background:#222;
+    color:white;
+    padding:13px 20px;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+/* HERO */
+
+.hero{
+    width:90%;
+    max-width:1300px;
+    margin:25px auto;
+    background:#fff3c4;
+    border-radius:15px;
+    padding:45px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.hero h1{
+    font-size:42px;
+    margin-bottom:15px;
+}
+
+.hero p{
+    color:#555;
+    font-size:18px;
+    margin-bottom:25px;
+}
+
+.shop-btn{
+    background:#f5c400;
+    border:none;
+    padding:14px 28px;
+    border-radius:8px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.hero-icon{
+    font-size:120px;
+}
+
+/* CONTAINER */
+
+.container{
+    width:90%;
+    max-width:1300px;
+    margin:auto;
+}
+
+.section-title{
+    margin:35px 0 20px;
+}
+
+/* CATEGORY */
+
+.categories{
+    display:grid;
+    grid-template-columns:repeat(8,1fr);
+    gap:15px;
+}
+
+.category{
+    background:white;
+    padding:18px 10px;
+    text-align:center;
+    border-radius:12px;
+    cursor:pointer;
+}
+
+.category-icon{
+    font-size:40px;
+    margin-bottom:10px;
+}
+
+/* PRODUCTS */
+
+.products{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:18px;
+}
+
+.product{
+    background:white;
+    padding:15px;
+    border-radius:12px;
+    border:1px solid #eee;
+}
+
+.product-image{
+    height:150px;
+    background:#f7f7f7;
+    border-radius:10px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:70px;
+    margin-bottom:15px;
+}
+
+.product h3{
+    margin-bottom:8px;
+}
+
+.quantity{
+    color:#777;
+    font-size:13px;
+    margin-bottom:15px;
+}
+
+.product-bottom{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.price{
+    font-weight:bold;
+}
+
+.add-btn{
+    background:white;
+    border:1px solid #f5c400;
+    padding:7px 16px;
+    border-radius:6px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.add-btn:hover{
+    background:#f5c400;
+}
+
+/* CART */
+
+.cart-section{
+    display:none;
+    width:90%;
+    max-width:900px;
+    margin:40px auto;
+    background:white;
+    padding:30px;
+    border-radius:15px;
+}
+
+.cart-section h2{
+    margin-bottom:20px;
+}
+
+.cart-item{
+    display:flex;
+    justify-content:space-between;
+    padding:15px 0;
+    border-bottom:1px solid #eee;
+}
+
+.total{
+    display:flex;
+    justify-content:space-between;
+    margin-top:25px;
+    font-size:20px;
+    font-weight:bold;
+}
+
+.checkout-btn{
+    width:100%;
+    margin-top:25px;
+    padding:15px;
+    border:none;
+    background:#f5c400;
+    border-radius:8px;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+/* CHECKOUT */
+
+.checkout{
+    display:none;
+    width:90%;
+    max-width:700px;
+    margin:40px auto;
+    background:white;
+    padding:30px;
+    border-radius:15px;
+}
+
+.checkout h2{
+    margin-bottom:25px;
+}
+
+.input{
+    width:100%;
+    padding:13px;
+    margin-bottom:15px;
+    border:1px solid #ddd;
+    border-radius:7px;
+}
+
+/* PAYMENT */
+
+.payment{
+    margin-top:25px;
+}
+
+.payment h3{
+    margin-bottom:15px;
+}
+
+.payment-option{
+    border:1px solid #ddd;
+    padding:15px;
+    margin-bottom:12px;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+.payment-option:hover{
+    border-color:#f5c400;
+    background:#fffdf0;
+}
+
+.payment-option input{
+    margin-right:10px;
+}
+
+.card-box{
+    display:none;
+    margin-top:15px;
+}
+
+.upi-box{
+    display:none;
+    margin-top:15px;
+}
+
+.place-order{
+    width:100%;
+    padding:15px;
+    margin-top:25px;
+    background:#222;
+    color:white;
+    border:none;
+    border-radius:8px;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+/* SUCCESS */
+
+.success{
+    display:none;
+    width:90%;
+    max-width:600px;
+    margin:50px auto;
+    background:white;
+    padding:50px;
+    text-align:center;
+    border-radius:15px;
+}
+
+.success-icon{
+    font-size:70px;
+    margin-bottom:20px;
+}
+
+.success h2{
+    margin-bottom:10px;
+}
+
+.success p{
+    color:#666;
+}
+
+/* FOOTER */
+
+footer{
+    margin-top:60px;
+    background:#222;
+    color:white;
+    padding:40px 5%;
+    text-align:center;
+}
+
+footer h2{
+    color:#f5c400;
+    margin-bottom:10px;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:1000px){
+
+    .categories{
+        grid-template-columns:repeat(4,1fr);
+    }
+
+    .products{
+        grid-template-columns:repeat(3,1fr);
+    }
+
+}
+
+@media(max-width:650px){
+
+    nav{
+        gap:10px;
+        padding:0 15px;
+    }
+
+    .location,
+    .login{
+        display:none;
+    }
+
+    .hero{
+        padding:25px;
+    }
+
+    .hero h1{
+        font-size:28px;
+    }
+
+    .hero-icon{
+        font-size:70px;
+    }
+
+    .categories{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .products{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+<!-- NAVBAR -->
+
+<nav>
+
+    <div class="logo">
+        Quick<span>Kart</span>
+    </div>
+
+    <div class="location">
+        📍 Deliver to
+        <small>Vaijapur, Maharashtra</small>
+    </div>
+
+    <div class="menu"
+         onclick="showMenu()">
+        Menu
+    </div>
+
+    <div class="search">
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="Search groceries..."
+        >
+    </div>
+
+    <div class="login">
+        Login
+    </div>
+
+    <div class="cart"
+         onclick="showCart()">
+
+        🛒 Cart
+        (<span id="cartCount">0</span>)
+
+    </div>
+
+</nav>
+
+
+<!-- HERO -->
+
+<section class="hero">
+
+    <div>
+
+        <h1>
+            Groceries delivered fast ⚡
+        </h1>
+
+        <p>
+            Fresh groceries and daily essentials
+            delivered to your doorstep.
+        </p>
+
+        <button
+            class="shop-btn"
+            onclick="showMenu()">
+
+            Shop Now
+
+        </button>
+
+    </div>
+
+    <div class="hero-icon">
+        🛍️
+    </div>
+
+</section>
+
+
+<!-- MENU -->
+
+<main
+    class="container"
+    id="menuSection">
+
+    <h2 class="section-title">
+        Menu 🛒
+    </h2>
+
+
+    <!-- CATEGORIES -->
+
+    <div class="categories">
+
+        <div class="category">
+            <div class="category-icon">🍎</div>
+            Fruits
+        </div>
+
+        <div class="category">
+            <div class="category-icon">🥦</div>
+            Vegetables
+        </div>
+
+        <div class="category">
+            <div class="category-icon">🥛</div>
+            Dairy
+        </div>
+
+        <div class="category">
+            <div class="category-icon">🍪</div>
+            Snacks
+        </div>
+
+        <div class="category">
+            <div class="category-icon">🥤</div>
+            Drinks
+        </div>
+
+        <div class="category">
+            <div class="category-icon">🍚</div>
+            Staples
+        </div>
+
+        <div class="category">
+            <div class="category-icon">🧴</div>
+            Personal Care
+        </div>
+
+        <div class="category">
+            <div class="category-icon">🧹</div>
+            Home Care
+        </div>
+
+    </div>
+
+
+    <!-- PRODUCTS -->
+
+    <h2 class="section-title">
+        Popular Products
+    </h2>
+
+
+    <div class="products">
+
+
+        <div class="product"
+             data-name="Apple"
+             data-price="120">
+
+            <div class="product-image">
+                🍎
+            </div>
+
+            <h3>Fresh Apples</h3>
+
+            <div class="quantity">
+                1 kg
+            </div>
+
+            <div class="product-bottom">
+
+                <span class="price">
+                    ₹120
+                </span>
+
+                <button
+                    class="add-btn"
+                    onclick="addProduct('Fresh Apples',120)">
+
+                    ADD
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="product"
+             data-name="Banana"
+             data-price="60">
+
+            <div class="product-image">
+                🍌
+            </div>
+
+            <h3>Fresh Banana</h3>
+
+            <div class="quantity">
+                1 dozen
+            </div>
+
+            <div class="product-bottom">
+
+                <span class="price">
+                    ₹60
+                </span>
+
+                <button
+                    class="add-btn"
+                    onclick="addProduct('Fresh Banana',60)">
+
+                    ADD
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="product"
+             data-name="Milk"
+             data-price="58">
+
+            <div class="product-image">
+                🥛
+            </div>
+
+            <h3>Fresh Milk</h3>
+
+            <div class="quantity">
+                1 litre
+            </div>
+
+            <div class="product-bottom">
+
+                <span class="price">
+                    ₹58
+                </span>
+
+                <button
+                    class="add-btn"
+                    onclick="addProduct('Fresh Milk',58)">
+
+                    ADD
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="product"
+             data-name="Potato"
+             data-price="40">
+
+            <div class="product-image">
+                🥔
+            </div>
+
+            <h3>Potato</h3>
+
+            <div class="quantity">
+                1 kg
+            </div>
+
+            <div class="product-bottom">
+
+                <span class="price">
+                    ₹40
+                </span>
+
+                <button
+                    class="add-btn"
+                    onclick="addProduct('Potato',40)">
+
+                    ADD
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="product"
+             data-name="Biscuits"
+             data-price="30">
+
+            <div class="product-image">
+                🍪
+            </div>
+
+            <h3>Chocolate Biscuits</h3>
+
+            <div class="quantity">
+                200 g
+            </div>
+
+            <div class="product-bottom">
+
+                <span class="price">
+                    ₹30
+                </span>
+
+                <button
+                    class="add-btn"
+                    onclick="addProduct('Chocolate Biscuits',30)">
+
+                    ADD
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="product"
+             data-name="Rice"
+             data-price="350">
+
+            <div class="product-image">
+                🍚
+            </div>
+
+            <h3>Premium Rice</h3>
+
+            <div class="quantity">
+                5 kg
+            </div>
+
+            <div class="product-bottom">
+
+                <span class="price">
+                    ₹350
+                </span>
+
+                <button
+                    class="add-btn"
+                    onclick="addProduct('Premium Rice',350)">
+
+                    ADD
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="product"
+             data-name="Juice"
+             data-price="110">
+
+            <div class="product-image">
+                🧃
+            </div>
+
+            <h3>Orange Juice</h3>
+
+            <div class="quantity">
+                1 litre
+            </div>
+
+            <div class="product-bottom">
+
+                <span class="price">
+                    ₹110
+                </span>
+
+                <button
+                    class="add-btn"
+                    onclick="addProduct('Orange Juice',110)">
+
+                    ADD
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="product"
+             data-name="Tomato"
+             data-price="50">
+
+            <div class="product-image">
+                🍅
+            </div>
+
+            <h3>Fresh Tomato</h3>
+
+            <div class="quantity">
+                1 kg
+            </div>
+
+            <div class="product-bottom">
+
+                <span class="price">
+                    ₹50
+                </span>
+
+                <button
+                    class="add-btn"
+                    onclick="addProduct('Fresh Tomato',50)">
+
+                    ADD
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="product"
+             data-name="Bread"
+             data-price="45">
+
+            <div class="product-image">
+                🍞
+            </div>
+
+            <h3>Fresh Bread</h3>
+
+            <div class="quantity">
+                400 g
+            </div>
+
+            <div class="product-bottom">
+
+                <span class="price">
+                    ₹45
+                </span>
+
+                <button
+                    class="add-btn"
+                    onclick="addProduct('Fresh Bread',45)">
+
+                    ADD
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="product"
+             data-name="Eggs"
+             data-price="90">
+
+            <div class="product-image">
+                🥚
+            </div>
+
+            <h3>Farm Eggs</h3>
+
+            <div class="quantity">
+                12 pieces
+            </div>
+
+            <div class="product-bottom">
+
+                <span class="price">
+                    ₹90
+                </span>
+
+                <button
+                    class="add-btn"
+                    onclick="addProduct('Farm Eggs',90)">
+
+                    ADD
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</main>
+
+
+<!-- CART -->
+
+<section
+    class="cart-section"
+    id="cartSection">
+
+    <h2>
+        Your Cart 🛒
+    </h2>
+
+    <div id="cartItems"></div>
+
+    <div class="total">
+
+        <span>
+            Total
+        </span>
+
+        <span>
+            ₹<span id="totalPrice">0</span>
+        </span>
+
+    </div>
+
+    <button
+        class="checkout-btn"
+        onclick="showCheckout()">
+
+        Proceed to Checkout
+
+    </button>
+
+</section>
+
+
+<!-- CHECKOUT -->
+
+<section
+    class="checkout"
+    id="checkoutSection">
+
+    <h2>
+        Checkout
+    </h2>
+
+
+    <input
+        class="input"
+        type="text"
+        placeholder="Full Name"
+        id="name"
+    >
+
+    <input
+        class="input"
+        type="text"
+        placeholder="Mobile Number"
+        id="mobile"
+    >
+
+    <input
+        class="input"
+        type="text"
+        placeholder="Delivery Address"
+        id="address"
+    >
+
+
+    <!-- PAYMENT -->
+
+    <div class="payment">
+
+        <h3>
+            Select Payment Method
+        </h3>
+
+
+        <label class="payment-option">
+
+            <input
+                type="radio"
+                name="payment"
+                value="upi"
+                onclick="showPayment('upi')"
+            >
+
+            📱 UPI
+
+        </label>
+
+
+        <label class="payment-option">
+
+            <input
+                type="radio"
+                name="payment"
+                value="card"
+                onclick="showPayment('card')"
+            >
+
+            💳 Credit / Debit Card
+
+        </label>
+
+
+        <label class="payment-option">
+
+            <input
+                type="radio"
+                name="payment"
+                value="cod"
+                onclick="showPayment('cod')"
+            >
+
+            💵 Cash on Delivery
+
+        </label>
+
+
+        <!-- UPI -->
+
+        <div
+            class="upi-box"
+            id="upiBox">
+
+            <input
+                class="input"
+                type="text"
+                placeholder="Enter UPI ID"
+            >
+
+        </div>
+
+
+        <!-- CARD -->
+
+        <div
+            class="card-box"
+            id="cardBox">
+
+            <input
+                class="input"
+                type="text"
+                placeholder="Card Number"
+            >
+
+            <input
+                class="input"
+                type="text"
+                placeholder="MM / YY"
+            >
+
+            <input
+                class="input"
+                type="password"
+                placeholder="CVV"
+            >
+
+        </div>
+
+
+        <button
+            class="place-order"
+            onclick="placeOrder()">
+
+            Place Order
+
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- SUCCESS -->
+
+<section
+    class="success"
+    id="successSection">
+
+    <div class="success-icon">
+        ✅
+    </div>
+
+    <h2>
+        Order Placed Successfully!
+    </h2>
+
+    <p>
+        Thank you for shopping with QuickKart.
+    </p>
+
+    <br>
+
+    <p>
+        Your groceries will be delivered soon 🚚
+    </p>
+
+</section>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+    <h2>
+        QuickKart
+    </h2>
+
+    <p>
+        Fast grocery delivery at your doorstep.
+    </p>
+
+    <br>
+
+    <p>
+        © 2026 QuickKart
+    </p>
+
+</footer>
+
+
+<script>
+
+/* CART DATA */
+
+let cart = [];
+
+
+/* ADD PRODUCT */
+
+function addProduct(name, price){
+
+    cart.push({
+        name:name,
+        price:price
+    });
+
+    document.getElementById("cartCount").innerText =
+        cart.length;
+
+    alert(name + " added to cart!");
+
+}
+
+
+/* SHOW MENU */
+
+function showMenu(){
+
+    document.getElementById("menuSection")
+        .scrollIntoView({
+            behavior:"smooth"
+        });
+
+}
+
+
+/* SHOW CART */
+
+function showCart(){
+
+    let cartSection =
+        document.getElementById("cartSection");
+
+    cartSection.style.display = "block";
+
+    let cartItems =
+        document.getElementById("cartItems");
+
+    cartItems.innerHTML = "";
+
+    let total = 0;
+
+
+    if(cart.length === 0){
+
+        cartItems.innerHTML =
+            "<p>Your cart is empty.</p>";
+
+    }
+
+
+    cart.forEach(function(item, index){
+
+        total += item.price;
+
+        cartItems.innerHTML += `
+
+            <div class="cart-item">
+
+                <span>
+                    ${item.name}
+                </span>
+
+                <span>
+                    ₹${item.price}
+                </span>
+
+            </div>
+
+        `;
+
+    });
+
+
+    document.getElementById("totalPrice")
+        .innerText = total;
+
+
+    cartSection.scrollIntoView({
+        behavior:"smooth"
+    });
+
+}
+
+
+/* CHECKOUT */
+
+function showCheckout(){
+
+    if(cart.length === 0){
+
+        alert("Please add a product to cart first.");
+
+        return;
+
+    }
+
+    document.getElementById("checkoutSection")
+        .style.display = "block";
+
+    document.getElementById("checkoutSection")
+        .scrollIntoView({
+            behavior:"smooth"
+        });
+
+}
+
+
+/* PAYMENT */
+
+function showPayment(type){
+
+    document.getElementById("upiBox")
+        .style.display = "none";
+
+    document.getElementById("cardBox")
+        .style.display = "none";
+
+
+    if(type === "upi"){
+
+        document.getElementById("upiBox")
+            .style.display = "block";
+
+    }
+
+
+    if(type === "card"){
+
+        document.getElementById("cardBox")
+            .style.display = "block";
+
+    }
+
+}
+
+
+/* PLACE ORDER */
+
+function placeOrder(){
+
+    let name =
+        document.getElementById("name").value;
+
+    let mobile =
+        document.getElementById("mobile").value;
+
+    let address =
+        document.getElementById("address").value;
+
+
+    let payment =
+        document.querySelector(
+            'input[name="payment"]:checked'
+        );
+
+
+    if(name === "" ||
+       mobile === "" ||
+       address === ""){
+
+        alert("Please fill all delivery details.");
+
+        return;
+
+    }
+
+
+    if(!payment){
+
+        alert("Please select a payment method.");
+
+        return;
+
+    }
+
+
+    document.getElementById("checkoutSection")
+        .style.display = "none";
+
+    document.getElementById("cartSection")
+        .style.display = "none";
+
+    document.getElementById("menuSection")
+        .style.display = "none";
+
+    document.getElementById("successSection")
+        .style.display = "block";
+
+    document.getElementById("successSection")
+        .scrollIntoView({
+            behavior:"smooth"
+        });
+
+
+    cart = [];
+
+    document.getElementById("cartCount")
+        .innerText = "0";
+
+}
+
+
+/* SEARCH */
+
+document
+    .getElementById("searchInput")
+    .addEventListener(
+        "input",
+        function(){
+
+            let value =
+                this.value.toLowerCase();
+
+            let products =
+                document.querySelectorAll(".product");
+
+
+            products.forEach(function(product){
+
+                let name =
+                    product
+                    .getAttribute("data-name")
+                    .toLowerCase();
+
+
+                if(name.includes(value)){
+
+                    product.style.display =
+                        "block";
+
+                }else{
+
+                    product.style.display =
+                        "none";
+
+                }
+
+            });
+
+        }
+    );
+
+</script>
+
+
+</body>
+</html>
+```

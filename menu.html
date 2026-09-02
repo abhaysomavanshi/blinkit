@@ -1,0 +1,589 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>QuickKart - Menu</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f7f7f7;
+            color: #222;
+        }
+
+        /* Navbar */
+        nav {
+            background: white;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 6%;
+            box-shadow: 0 2px 8px #ddd;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: #f5c400;
+        }
+
+        .search {
+            width: 45%;
+        }
+
+        .search input {
+            width: 100%;
+            padding: 13px 18px;
+            border: none;
+            background: #f2f2f2;
+            border-radius: 8px;
+            outline: none;
+            font-size: 15px;
+        }
+
+        .cart {
+            background: #222;
+            color: white;
+            padding: 12px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            padding: 40px 20px 25px;
+        }
+
+        .header h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #666;
+        }
+
+        /* Categories */
+        .categories {
+            width: 90%;
+            margin: auto;
+            display: flex;
+            gap: 15px;
+            overflow-x: auto;
+            padding: 10px 0 25px;
+        }
+
+        .category {
+            min-width: 130px;
+            background: white;
+            padding: 18px 10px;
+            text-align: center;
+            border-radius: 12px;
+            cursor: pointer;
+            border: 1px solid #eee;
+        }
+
+        .category:hover {
+            background: #fff4c2;
+        }
+
+        .category .icon {
+            font-size: 40px;
+            margin-bottom: 8px;
+        }
+
+        .category p {
+            font-weight: bold;
+        }
+
+        /* Menu */
+        .menu {
+            width: 90%;
+            max-width: 1300px;
+            margin: auto;
+        }
+
+        .menu-title {
+            font-size: 25px;
+            margin: 25px 0 20px;
+        }
+
+        .products {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 18px;
+        }
+
+        .product {
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            border: 1px solid #eee;
+            transition: 0.2s;
+        }
+
+        .product:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px #ddd;
+        }
+
+        .product-image {
+            height: 160px;
+            background: #f7f7f7;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 75px;
+            margin-bottom: 15px;
+        }
+
+        .product h3 {
+            font-size: 16px;
+            margin-bottom: 7px;
+        }
+
+        .weight {
+            color: #777;
+            font-size: 13px;
+            margin-bottom: 15px;
+        }
+
+        .bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .price {
+            font-weight: bold;
+            font-size: 17px;
+        }
+
+        .add {
+            background: white;
+            border: 1px solid #f5c400;
+            padding: 7px 15px;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .add:hover {
+            background: #f5c400;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 60px;
+            background: #222;
+            color: white;
+            text-align: center;
+            padding: 35px;
+        }
+
+        footer h2 {
+            color: #f5c400;
+            margin-bottom: 10px;
+        }
+
+        footer p {
+            color: #ccc;
+        }
+
+        /* Responsive */
+        @media(max-width: 1000px) {
+            .products {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media(max-width: 650px) {
+            nav {
+                padding: 0 15px;
+            }
+
+            .search {
+                width: 40%;
+            }
+
+            .products {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .product-image {
+                height: 120px;
+                font-size: 55px;
+            }
+
+            .header h1 {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav>
+
+        <div class="logo">
+            Quick<span>Kart</span>
+        </div>
+
+        <div class="search">
+            <input
+                type="text"
+                id="search"
+                placeholder="Search products..."
+            >
+        </div>
+
+        <div class="cart">
+            🛒 Cart <span id="cartCount">0</span>
+        </div>
+
+    </nav>
+
+
+    <!-- Header -->
+    <section class="header">
+
+        <h1>Our Menu 🛒</h1>
+
+        <p>
+            Fresh groceries and daily essentials delivered to your doorstep.
+        </p>
+
+    </section>
+
+
+    <!-- Categories -->
+    <div class="categories">
+
+        <div class="category">
+            <div class="icon">🍎</div>
+            <p>Fruits</p>
+        </div>
+
+        <div class="category">
+            <div class="icon">🥦</div>
+            <p>Vegetables</p>
+        </div>
+
+        <div class="category">
+            <div class="icon">🥛</div>
+            <p>Dairy</p>
+        </div>
+
+        <div class="category">
+            <div class="icon">🍪</div>
+            <p>Snacks</p>
+        </div>
+
+        <div class="category">
+            <div class="icon">🥤</div>
+            <p>Drinks</p>
+        </div>
+
+        <div class="category">
+            <div class="icon">🍚</div>
+            <p>Staples</p>
+        </div>
+
+        <div class="category">
+            <div class="icon">🧴</div>
+            <p>Personal Care</p>
+        </div>
+
+    </div>
+
+
+    <!-- Products -->
+    <section class="menu">
+
+        <h2 class="menu-title">
+            Popular Products
+        </h2>
+
+        <div class="products" id="products">
+
+            <div class="product" data-name="Apple">
+
+                <div class="product-image">🍎</div>
+
+                <h3>Fresh Apple</h3>
+
+                <div class="weight">1 kg</div>
+
+                <div class="bottom">
+                    <span class="price">₹120</span>
+
+                    <button class="add" onclick="addCart()">
+                        ADD
+                    </button>
+                </div>
+
+            </div>
+
+
+            <div class="product" data-name="Banana">
+
+                <div class="product-image">🍌</div>
+
+                <h3>Banana</h3>
+
+                <div class="weight">1 dozen</div>
+
+                <div class="bottom">
+                    <span class="price">₹60</span>
+
+                    <button class="add" onclick="addCart()">
+                        ADD
+                    </button>
+                </div>
+
+            </div>
+
+
+            <div class="product" data-name="Milk">
+
+                <div class="product-image">🥛</div>
+
+                <h3>Fresh Milk</h3>
+
+                <div class="weight">1 litre</div>
+
+                <div class="bottom">
+                    <span class="price">₹58</span>
+
+                    <button class="add" onclick="addCart()">
+                        ADD
+                    </button>
+                </div>
+
+            </div>
+
+
+            <div class="product" data-name="Potato">
+
+                <div class="product-image">🥔</div>
+
+                <h3>Potato</h3>
+
+                <div class="weight">1 kg</div>
+
+                <div class="bottom">
+                    <span class="price">₹40</span>
+
+                    <button class="add" onclick="addCart()">
+                        ADD
+                    </button>
+                </div>
+
+            </div>
+
+
+            <div class="product" data-name="Tomato">
+
+                <div class="product-image">🍅</div>
+
+                <h3>Fresh Tomato</h3>
+
+                <div class="weight">1 kg</div>
+
+                <div class="bottom">
+                    <span class="price">₹50</span>
+
+                    <button class="add" onclick="addCart()">
+                        ADD
+                    </button>
+                </div>
+
+            </div>
+
+
+            <div class="product" data-name="Bread">
+
+                <div class="product-image">🍞</div>
+
+                <h3>Fresh Bread</h3>
+
+                <div class="weight">400 g</div>
+
+                <div class="bottom">
+                    <span class="price">₹45</span>
+
+                    <button class="add" onclick="addCart()">
+                        ADD
+                    </button>
+                </div>
+
+            </div>
+
+
+            <div class="product" data-name="Rice">
+
+                <div class="product-image">🍚</div>
+
+                <h3>Premium Rice</h3>
+
+                <div class="weight">5 kg</div>
+
+                <div class="bottom">
+                    <span class="price">₹350</span>
+
+                    <button class="add" onclick="addCart()">
+                        ADD
+                    </button>
+                </div>
+
+            </div>
+
+
+            <div class="product" data-name="Biscuits">
+
+                <div class="product-image">🍪</div>
+
+                <h3>Chocolate Biscuits</h3>
+
+                <div class="weight">200 g</div>
+
+                <div class="bottom">
+                    <span class="price">₹30</span>
+
+                    <button class="add" onclick="addCart()">
+                        ADD
+                    </button>
+                </div>
+
+            </div>
+
+
+            <div class="product" data-name="Juice">
+
+                <div class="product-image">🧃</div>
+
+                <h3>Orange Juice</h3>
+
+                <div class="weight">1 litre</div>
+
+                <div class="bottom">
+                    <span class="price">₹110</span>
+
+                    <button class="add" onclick="addCart()">
+                        ADD
+                    </button>
+                </div>
+
+            </div>
+
+
+            <div class="product" data-name="Egg">
+
+                <div class="product-image">🥚</div>
+
+                <h3>Farm Eggs</h3>
+
+                <div class="weight">12 pieces</div>
+
+                <div class="bottom">
+                    <span class="price">₹90</span>
+
+                    <button class="add" onclick="addCart()">
+                        ADD
+                    </button>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Footer -->
+    <footer>
+
+        <h2>QuickKart</h2>
+
+        <p>
+            Your favourite grocery delivery website.
+        </p>
+
+        <br>
+
+        <p>
+            © 2026 QuickKart. All Rights Reserved.
+        </p>
+
+    </footer>
+
+
+    <script>
+
+        let cart = 0;
+
+        function addCart() {
+
+            cart++;
+
+            document.getElementById("cartCount").innerText = cart;
+
+        }
+
+
+        // Search functionality
+
+        document.getElementById("search").addEventListener(
+            "input",
+            function () {
+
+                let value = this.value.toLowerCase();
+
+                let products =
+                    document.querySelectorAll(".product");
+
+                products.forEach(function(product) {
+
+                    let name =
+                        product.dataset.name.toLowerCase();
+
+                    if (name.includes(value)) {
+
+                        product.style.display = "block";
+
+                    } else {
+
+                        product.style.display = "none";
+
+                    }
+
+                });
+
+            }
+        );
+
+    </script>
+
+</body>
+</html>
+```

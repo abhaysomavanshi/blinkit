@@ -1,1031 +1,1123 @@
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>QuickKart - Grocery Delivery</title>
-
-    <style>
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, Helvetica, sans-serif;
-        }
-
-        body {
-            background: #f7f7f7;
-            color: #222;
-        }
-
-        /* ================= NAVBAR ================= */
-
-        nav {
-            height: 70px;
-            background: white;
-            display: flex;
-            align-items: center;
-            padding: 0 5%;
-            gap: 25px;
-            border-bottom: 1px solid #eee;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .logo {
-            font-size: 28px;
-            font-weight: bold;
-            color: #f5c400;
-        }
-
-        .logo span {
-            color: #222;
-        }
-
-        .location {
-            font-size: 14px;
-            font-weight: bold;
-            min-width: 150px;
-        }
-
-        .location small {
-            display: block;
-            color: #777;
-            font-weight: normal;
-            margin-top: 4px;
-        }
-
-        /* MENU */
-
-        .menu {
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            white-space: nowrap;
-        }
-
-        .menu:hover {
-            color: #f5c400;
-        }
-
-        .search {
-            flex: 1;
-            max-width: 600px;
-            position: relative;
-        }
-
-        .search input {
-            width: 100%;
-            padding: 14px 45px;
-            border: none;
-            background: #f2f2f2;
-            border-radius: 10px;
-            outline: none;
-            font-size: 15px;
-        }
-
-        .search-icon {
-            position: absolute;
-            left: 15px;
-            top: 13px;
-            font-size: 18px;
-        }
-
-        .login {
-            font-size: 16px;
-            cursor: pointer;
-        }
-
-        .cart {
-            background: #222;
-            color: white;
-            padding: 13px 20px;
-            border-radius: 8px;
-            cursor: pointer;
-        }
-
-        /* ================= HERO ================= */
-
-        .hero {
-            width: 90%;
-            max-width: 1300px;
-            margin: 25px auto;
-            background: #fff3c4;
-            border-radius: 15px;
-            padding: 45px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .hero-text h1 {
-            font-size: 42px;
-            margin-bottom: 15px;
-        }
-
-        .hero-text p {
-            font-size: 18px;
-            color: #555;
-            margin-bottom: 25px;
-        }
-
-        .shop-btn {
-            background: #f5c400;
-            border: none;
-            padding: 14px 28px;
-            border-radius: 8px;
-            font-weight: bold;
-            cursor: pointer;
-            font-size: 16px;
-        }
-
-        .hero-icon {
-            font-size: 130px;
-        }
-
-        /* ================= CONTAINER ================= */
-
-        .container {
-            width: 90%;
-            max-width: 1300px;
-            margin: auto;
-        }
-
-        .section-title {
-            font-size: 25px;
-            margin: 35px 0 20px;
-        }
-
-        /* ================= CATEGORIES ================= */
-
-        .categories {
-            display: grid;
-            grid-template-columns: repeat(8, 1fr);
-            gap: 15px;
-        }
-
-        .category {
-            background: white;
-            border-radius: 12px;
-            padding: 18px 10px;
-            text-align: center;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-
-        .category:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px #ddd;
-        }
-
-        .category-icon {
-            font-size: 40px;
-            margin-bottom: 10px;
-        }
-
-        .category p {
-            font-size: 14px;
-            font-weight: bold;
-        }
-
-        /* ================= PRODUCTS / MENU ================= */
-
-        .products {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 18px;
-        }
-
-        .product {
-            background: white;
-            border-radius: 12px;
-            padding: 15px;
-            border: 1px solid #eee;
-            transition: 0.2s;
-        }
-
-        .product:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 5px 15px #ddd;
-        }
-
-        .product-image {
-            height: 160px;
-            background: #f7f7f7;
-            border-radius: 10px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 75px;
-            margin-bottom: 15px;
-        }
-
-        .product h3 {
-            font-size: 16px;
-            margin-bottom: 8px;
-        }
-
-        .quantity {
-            color: #777;
-            font-size: 13px;
-            margin-bottom: 15px;
-        }
-
-        .product-bottom {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .price {
-            font-weight: bold;
-        }
-
-        .add-btn {
-            border: 1px solid #f5c400;
-            background: white;
-            color: #222;
-            padding: 7px 16px;
-            border-radius: 6px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        .add-btn:hover {
-            background: #f5c400;
-        }
-
-        /* ================= FOOTER ================= */
-
-        footer {
-            margin-top: 60px;
-            background: #222;
-            color: white;
-            padding: 40px 5%;
-        }
-
-        .footer-content {
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 30px;
-        }
-
-        footer h2 {
-            color: #f5c400;
-            margin-bottom: 10px;
-        }
-
-        footer p {
-            color: #ccc;
-            margin: 7px 0;
-        }
-
-        .copyright {
-            margin-top: 30px;
-            text-align: center;
-            border-top: 1px solid #444;
-            padding-top: 20px;
-            color: #aaa;
-        }
-
-        /* ================= RESPONSIVE ================= */
-
-        @media (max-width: 1000px) {
-
-            .categories {
-                grid-template-columns: repeat(4, 1fr);
-            }
-
-            .products {
-                grid-template-columns: repeat(3, 1fr);
-            }
-
-            .location {
-                display: none;
-            }
-        }
-
-        @media (max-width: 650px) {
-
-            nav {
-                padding: 0 15px;
-                gap: 10px;
-            }
-
-            .logo {
-                font-size: 22px;
-            }
-
-            .login {
-                display: none;
-            }
-
-            .cart {
-                padding: 10px;
-            }
-
-            .hero {
-                padding: 25px;
-            }
-
-            .hero-text h1 {
-                font-size: 28px;
-            }
-
-            .hero-icon {
-                font-size: 70px;
-            }
-
-            .categories {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .products {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .product-image {
-                height: 120px;
-                font-size: 55px;
-            }
-        }
-
-    </style>
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>QuickKart - Online Grocery</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #f5f5f5;
+    color: #222;
+}
+
+/* NAVBAR */
+.navbar {
+    background: #ffffff;
+    padding: 15px 5%;
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.logo {
+    font-size: 25px;
+    font-weight: bold;
+    color: #0aad0a;
+}
+
+.location {
+    font-size: 14px;
+}
+
+.search {
+    flex: 1;
+}
+
+.search input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 15px;
+}
+
+.nav-btn {
+    background: none;
+    border: none;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.cart {
+    background: #222;
+    color: white;
+    padding: 12px 18px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+}
+
+/* HERO */
+.hero {
+    background: #dfffdc;
+    padding: 50px 5%;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+.hero p {
+    font-size: 18px;
+}
+
+/* MENU */
+.menu {
+    padding: 35px 5%;
+}
+
+.menu h2 {
+    margin-bottom: 20px;
+}
+
+/* CATEGORIES */
+.categories {
+    display: flex;
+    gap: 15px;
+    overflow-x: auto;
+    margin-bottom: 30px;
+}
+
+.category {
+    background: white;
+    padding: 15px 25px;
+    border-radius: 10px;
+    min-width: 120px;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+}
+
+/* PRODUCTS */
+.products {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: 20px;
+}
+
+.product {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.product-image {
+    height: 130px;
+    background: #f2f2f2;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 65px;
+    margin-bottom: 15px;
+}
+
+.product h3 {
+    margin-bottom: 8px;
+}
+
+.price {
+    font-weight: bold;
+    margin-bottom: 12px;
+}
+
+.add-btn {
+    width: 100%;
+    padding: 10px;
+    background: #0aad0a;
+    color: white;
+    border: none;
+    border-radius: 7px;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+/* CART */
+.section {
+    display: none;
+    padding: 40px 5%;
+    background: white;
+    margin-top: 20px;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+}
+
+.remove-btn {
+    background: #ff4444;
+    color: white;
+    border: none;
+    padding: 7px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.primary-btn {
+    margin-top: 20px;
+    padding: 13px 25px;
+    background: #0aad0a;
+    color: white;
+    border: none;
+    border-radius: 7px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+/* CHECKOUT */
+.form-box {
+    max-width: 600px;
+    margin: auto;
+}
+
+.form-box input,
+.form-box textarea,
+.form-box select {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0 15px;
+    border: 1px solid #ccc;
+    border-radius: 7px;
+}
+
+/* PAYMENT */
+.payment-box {
+    max-width: 600px;
+    margin: auto;
+}
+
+.payment-option {
+    background: #f7f7f7;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.payment-option input {
+    margin-right: 10px;
+}
+
+.payment-details {
+    display: none;
+    margin-top: 15px;
+}
+
+.success {
+    text-align: center;
+    padding: 40px;
+}
+
+.success h2 {
+    color: #0aad0a;
+    margin-bottom: 15px;
+}
+
+/* FOOTER */
+footer {
+    margin-top: 40px;
+    background: #222;
+    color: white;
+    text-align: center;
+    padding: 25px;
+}
+
+/* MOBILE */
+@media(max-width: 768px) {
+
+    .navbar {
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+
+    .search {
+        order: 5;
+        flex-basis: 100%;
+    }
+
+    .hero h1 {
+        font-size: 30px;
+    }
+}
+</style>
 </head>
 
 <body>
 
+<!-- NAVBAR -->
+<nav class="navbar">
 
-    <!-- ================= NAVBAR ================= -->
+    <div class="logo">QuickKart 🛒</div>
 
-    <nav>
+    <div class="location">
+        📍 Aurangabad
+    </div>
 
-        <div class="logo">
-            Quick<span>Kart</span>
-        </div>
+    <button class="nav-btn" onclick="showMenu()">
+        Menu
+    </button>
 
-        <div class="location">
-            📍 Deliver to
-            <small>Vaijapur, Maharashtra</small>
-        </div>
+    <div class="search">
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="Search for products..."
+            onkeyup="searchProducts()"
+        >
+    </div>
 
-        <!-- MENU -->
-        <div class="menu"
-             onclick="document.getElementById('menuSection').scrollIntoView({behavior:'smooth'})">
+    <button class="nav-btn">
+        Login
+    </button>
 
-            Menu
+    <button class="cart" onclick="showCart()">
+        🛒 Cart (<span id="cartCount">0</span>)
+    </button>
 
-        </div>
-
-        <div class="search">
-
-            <span class="search-icon">🔍</span>
-
-            <input
-                type="text"
-                id="searchInput"
-                placeholder="Search for groceries, fruits, snacks..."
-            >
-
-        </div>
-
-        <div class="login">
-            Login
-        </div>
-
-        <div class="cart">
-
-            🛒 Cart
-            (<span id="cartCount">0</span>)
-
-        </div>
-
-    </nav>
+</nav>
 
 
-    <!-- ================= HERO ================= -->
+<!-- HERO -->
+<section class="hero">
 
-    <section class="hero">
+    <h1>Groceries Delivered Fast 🚀</h1>
 
-        <div class="hero-text">
+    <p>
+        Fresh groceries delivered to your doorstep.
+    </p>
 
-            <h1>
-                Groceries delivered fast ⚡
-            </h1>
+</section>
 
-            <p>
-                Fresh groceries, snacks & daily essentials
-                at your doorstep.
-            </p>
+
+<!-- MENU / PRODUCTS -->
+<section class="menu" id="menuSection">
+
+    <h2>Menu 🛍️</h2>
+
+    <!-- CATEGORIES -->
+    <div class="categories">
+
+        <div class="category">🥦 Vegetables</div>
+
+        <div class="category">🍎 Fruits</div>
+
+        <div class="category">🥛 Dairy</div>
+
+        <div class="category">🍪 Snacks</div>
+
+        <div class="category">🥤 Drinks</div>
+
+    </div>
+
+
+    <!-- PRODUCTS -->
+    <div class="products" id="productList">
+
+        <div class="product">
+
+            <div class="product-image">
+                🍎
+            </div>
+
+            <h3>Apple</h3>
+
+            <p class="price">₹120</p>
 
             <button
-                class="shop-btn"
-                onclick="document.getElementById('menuSection').scrollIntoView({behavior:'smooth'})">
-
-                Shop Now
-
+                class="add-btn"
+                onclick="addToCart('Apple',120)"
+            >
+                ADD
             </button>
 
         </div>
 
-        <div class="hero-icon">
-            🛍️
-        </div>
 
-    </section>
+        <div class="product">
 
-
-    <!-- ================= MAIN ================= -->
-
-    <main class="container">
-
-
-        <!-- ================= CATEGORIES ================= -->
-
-        <h2 class="section-title">
-            Shop by Category
-        </h2>
-
-        <div class="categories">
-
-            <div class="category">
-                <div class="category-icon">🍎</div>
-                <p>Fruits</p>
+            <div class="product-image">
+                🥛
             </div>
 
-            <div class="category">
-                <div class="category-icon">🥦</div>
-                <p>Vegetables</p>
-            </div>
+            <h3>Milk</h3>
 
-            <div class="category">
-                <div class="category-icon">🥛</div>
-                <p>Dairy</p>
-            </div>
+            <p class="price">₹60</p>
 
-            <div class="category">
-                <div class="category-icon">🍪</div>
-                <p>Snacks</p>
-            </div>
-
-            <div class="category">
-                <div class="category-icon">🥤</div>
-                <p>Drinks</p>
-            </div>
-
-            <div class="category">
-                <div class="category-icon">🍚</div>
-                <p>Staples</p>
-            </div>
-
-            <div class="category">
-                <div class="category-icon">🧴</div>
-                <p>Personal Care</p>
-            </div>
-
-            <div class="category">
-                <div class="category-icon">🧹</div>
-                <p>Home Care</p>
-            </div>
+            <button
+                class="add-btn"
+                onclick="addToCart('Milk',60)"
+            >
+                ADD
+            </button>
 
         </div>
 
 
-        <!-- ================= MENU ================= -->
+        <div class="product">
 
-        <h2
-            class="section-title"
-            id="menuSection">
+            <div class="product-image">
+                🍌
+            </div>
 
-            Menu 🛒
+            <h3>Banana</h3>
 
-        </h2>
+            <p class="price">₹50</p>
+
+            <button
+                class="add-btn"
+                onclick="addToCart('Banana',50)"
+            >
+                ADD
+            </button>
+
+        </div>
 
 
+        <div class="product">
+
+            <div class="product-image">
+                🥔
+            </div>
+
+            <h3>Potato</h3>
+
+            <p class="price">₹40</p>
+
+            <button
+                class="add-btn"
+                onclick="addToCart('Potato',40)"
+            >
+                ADD
+            </button>
+
+        </div>
+
+
+        <div class="product">
+
+            <div class="product-image">
+                🍅
+            </div>
+
+            <h3>Tomato</h3>
+
+            <p class="price">₹45</p>
+
+            <button
+                class="add-btn"
+                onclick="addToCart('Tomato',45)"
+            >
+                ADD
+            </button>
+
+        </div>
+
+
+        <div class="product">
+
+            <div class="product-image">
+                🥚
+            </div>
+
+            <h3>Eggs</h3>
+
+            <p class="price">₹80</p>
+
+            <button
+                class="add-btn"
+                onclick="addToCart('Eggs',80)"
+            >
+                ADD
+            </button>
+
+        </div>
+
+
+        <div class="product">
+
+            <div class="product-image">
+                🍪
+            </div>
+
+            <h3>Biscuits</h3>
+
+            <p class="price">₹30</p>
+
+            <button
+                class="add-btn"
+                onclick="addToCart('Biscuits',30)"
+            >
+                ADD
+            </button>
+
+        </div>
+
+
+        <div class="product">
+
+            <div class="product-image">
+                🥤
+            </div>
+
+            <h3>Juice</h3>
+
+            <p class="price">₹70</p>
+
+            <button
+                class="add-btn"
+                onclick="addToCart('Juice',70)"
+            >
+                ADD
+            </button>
+
+        </div>
+
+
+        <div class="product">
+
+            <div class="product-image">
+                🍚
+            </div>
+
+            <h3>Rice</h3>
+
+            <p class="price">₹250</p>
+
+            <button
+                class="add-btn"
+                onclick="addToCart('Rice',250)"
+            >
+                ADD
+            </button>
+
+        </div>
+
+
+        <div class="product">
+
+            <div class="product-image">
+                🥫
+            </div>
+
+            <h3>Cooking Oil</h3>
+
+            <p class="price">₹180</p>
+
+            <button
+                class="add-btn"
+                onclick="addToCart('Cooking Oil',180)"
+            >
+                ADD
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- CART -->
+<section class="section" id="cartSection">
+
+    <h2>🛒 Your Cart</h2>
+
+    <div id="cartItems"></div>
+
+    <h3 style="margin-top:20px;">
+        Total: ₹<span id="totalPrice">0</span>
+    </h3>
+
+    <button
+        class="primary-btn"
+        onclick="showCheckout()"
+    >
+        Proceed to Checkout
+    </button>
+
+</section>
+
+
+<!-- CHECKOUT -->
+<section class="section" id="checkoutSection">
+
+    <div class="form-box">
+
+        <h2>📦 Checkout</h2>
+
+        <label>Full Name</label>
+
+        <input
+            type="text"
+            id="fullName"
+            placeholder="Enter your name"
+        >
+
+
+        <label>Mobile Number</label>
+
+        <input
+            type="tel"
+            id="mobile"
+            placeholder="Enter mobile number"
+        >
+
+
+        <label>Delivery Address</label>
+
+        <textarea
+            id="address"
+            rows="4"
+            placeholder="Enter complete address"
+        ></textarea>
+
+
+        <button
+            class="primary-btn"
+            onclick="showPayment()"
+        >
+            Continue to Payment
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- PAYMENT -->
+<section class="section" id="paymentSection">
+
+    <div class="payment-box">
+
+        <h2>💳 Payment Options</h2>
+
+        <p style="margin:15px 0;">
+            Select your preferred payment method:
+        </p>
+
+
+        <!-- UPI -->
+        <label class="payment-option">
+
+            <input
+                type="radio"
+                name="payment"
+                value="upi"
+                onclick="showPaymentDetails('upi')"
+            >
+
+            📱 UPI Payment
+
+        </label>
+
+
+        <!-- CARD -->
+        <label class="payment-option">
+
+            <input
+                type="radio"
+                name="payment"
+                value="card"
+                onclick="showPaymentDetails('card')"
+            >
+
+            💳 Credit / Debit Card
+
+        </label>
+
+
+        <!-- COD -->
+        <label class="payment-option">
+
+            <input
+                type="radio"
+                name="payment"
+                value="cod"
+                onclick="showPaymentDetails('cod')"
+            >
+
+            💵 Cash on Delivery
+
+        </label>
+
+
+        <!-- UPI DETAILS -->
         <div
-            class="products"
-            id="productList">
-
-
-            <!-- PRODUCT 1 -->
-
-            <div
-                class="product"
-                data-name="Fresh Apples">
-
-                <div class="product-image">
-                    🍎
-                </div>
-
-                <h3>
-                    Fresh Apples
-                </h3>
-
-                <div class="quantity">
-                    1 kg
-                </div>
-
-                <div class="product-bottom">
-
-                    <span class="price">
-                        ₹120
-                    </span>
-
-                    <button
-                        class="add-btn"
-                        onclick="addToCart()">
-
-                        ADD
-
-                    </button>
-
-                </div>
-
-            </div>
-
-
-            <!-- PRODUCT 2 -->
-
-            <div
-                class="product"
-                data-name="Banana">
-
-                <div class="product-image">
-                    🍌
-                </div>
-
-                <h3>
-                    Fresh Banana
-                </h3>
-
-                <div class="quantity">
-                    1 dozen
-                </div>
-
-                <div class="product-bottom">
-
-                    <span class="price">
-                        ₹60
-                    </span>
-
-                    <button
-                        class="add-btn"
-                        onclick="addToCart()">
-
-                        ADD
-
-                    </button>
-
-                </div>
-
-            </div>
-
-
-            <!-- PRODUCT 3 -->
-
-            <div
-                class="product"
-                data-name="Milk">
-
-                <div class="product-image">
-                    🥛
-                </div>
-
-                <h3>
-                    Fresh Milk
-                </h3>
-
-                <div class="quantity">
-                    1 litre
-                </div>
-
-                <div class="product-bottom">
-
-                    <span class="price">
-                        ₹58
-                    </span>
-
-                    <button
-                        class="add-btn"
-                        onclick="addToCart()">
-
-                        ADD
-
-                    </button>
-
-                </div>
-
-            </div>
-
-
-            <!-- PRODUCT 4 -->
-
-            <div
-                class="product"
-                data-name="Potato">
-
-                <div class="product-image">
-                    🥔
-                </div>
-
-                <h3>
-                    Potato
-                </h3>
-
-                <div class="quantity">
-                    1 kg
-                </div>
-
-                <div class="product-bottom">
-
-                    <span class="price">
-                        ₹40
-                    </span>
-
-                    <button
-                        class="add-btn"
-                        onclick="addToCart()">
-
-                        ADD
-
-                    </button>
-
-                </div>
-
-            </div>
-
-
-            <!-- PRODUCT 5 -->
-
-            <div
-                class="product"
-                data-name="Biscuits">
-
-                <div class="product-image">
-                    🍪
-                </div>
-
-                <h3>
-                    Chocolate Biscuits
-                </h3>
-
-                <div class="quantity">
-                    200 g
-                </div>
-
-                <div class="product-bottom">
-
-                    <span class="price">
-                        ₹30
-                    </span>
-
-                    <button
-                        class="add-btn"
-                        onclick="addToCart()">
-
-                        ADD
-
-                    </button>
-
-                </div>
-
-            </div>
-
-
-            <!-- PRODUCT 6 -->
-
-            <div
-                class="product"
-                data-name="Rice">
-
-                <div class="product-image">
-                    🍚
-                </div>
-
-                <h3>
-                    Premium Rice
-                </h3>
-
-                <div class="quantity">
-                    5 kg
-                </div>
-
-                <div class="product-bottom">
-
-                    <span class="price">
-                        ₹350
-                    </span>
-
-                    <button
-                        class="add-btn"
-                        onclick="addToCart()">
-
-                        ADD
-
-                    </button>
-
-                </div>
-
-            </div>
-
-
-            <!-- PRODUCT 7 -->
-
-            <div
-                class="product"
-                data-name="Orange Juice">
-
-                <div class="product-image">
-                    🧃
-                </div>
-
-                <h3>
-                    Orange Juice
-                </h3>
-
-                <div class="quantity">
-                    1 litre
-                </div>
-
-                <div class="product-bottom">
-
-                    <span class="price">
-                        ₹110
-                    </span>
-
-                    <button
-                        class="add-btn"
-                        onclick="addToCart()">
-
-                        ADD
-
-                    </button>
-
-                </div>
-
-            </div>
-
-
-            <!-- PRODUCT 8 -->
-
-            <div
-                class="product"
-                data-name="Tomato">
-
-                <div class="product-image">
-                    🍅
-                </div>
-
-                <h3>
-                    Fresh Tomato
-                </h3>
-
-                <div class="quantity">
-                    1 kg
-                </div>
-
-                <div class="product-bottom">
-
-                    <span class="price">
-                        ₹50
-                    </span>
-
-                    <button
-                        class="add-btn"
-                        onclick="addToCart()">
-
-                        ADD
-
-                    </button>
-
-                </div>
-
-            </div>
-
-
-            <!-- PRODUCT 9 -->
-
-            <div
-                class="product"
-                data-name="Bread">
-
-                <div class="product-image">
-                    🍞
-                </div>
-
-                <h3>
-                    Fresh Bread
-                </h3>
-
-                <div class="quantity">
-                    400 g
-                </div>
-
-                <div class="product-bottom">
-
-                    <span class="price">
-                        ₹45
-                    </span>
-
-                    <button
-                        class="add-btn"
-                        onclick="addToCart()">
-
-                        ADD
-
-                    </button>
-
-                </div>
-
-            </div>
-
-
-            <!-- PRODUCT 10 -->
-
-            <div
-                class="product"
-                data-name="Eggs">
-
-                <div class="product-image">
-                    🥚
-                </div>
-
-                <h3>
-                    Farm Eggs
-                </h3>
-
-                <div class="quantity">
-                    12 pieces
-                </div>
-
-                <div class="product-bottom">
-
-                    <span class="price">
-                        ₹90
-                    </span>
-
-                    <button
-                        class="add-btn"
-                        onclick="addToCart()">
-
-                        ADD
-
-                    </button>
-
-                </div>
-
-            </div>
-
-
-        </div>
-
-    </main>
-
-
-    <!-- ================= FOOTER ================= -->
-
-    <footer>
-
-        <div class="footer-content">
-
-            <div>
-
-                <h2>
-                    QuickKart
-                </h2>
-
-                <p>
-                    Fast grocery delivery
-                </p>
-
-                <p>
-                    Fresh products at your doorstep.
-                </p>
-
-            </div>
-
-
-            <div>
-
-                <h3>
-                    Company
-                </h3>
-
-                <p>
-                    About Us
-                </p>
-
-                <p>
-                    Contact
-                </p>
-
-                <p>
-                    Careers
-                </p>
-
-            </div>
-
-
-            <div>
-
-                <h3>
-                    Help
-                </h3>
-
-                <p>
-                    Customer Support
-                </p>
-
-                <p>
-                    Delivery Information
-                </p>
-
-                <p>
-                    Terms & Conditions
-                </p>
-
-            </div>
+            id="upiDetails"
+            class="payment-details"
+        >
+
+            <input
+                type="text"
+                id="upiId"
+                placeholder="Enter UPI ID e.g. abhay@upi"
+            >
 
         </div>
 
 
-        <div class="copyright">
+        <!-- CARD DETAILS -->
+        <div
+            id="cardDetails"
+            class="payment-details"
+        >
 
-            © 2026 QuickKart.
-            All Rights Reserved.
+            <input
+                type="text"
+                placeholder="Card Number"
+            >
+
+            <input
+                type="text"
+                placeholder="MM / YY"
+            >
+
+            <input
+                type="password"
+                placeholder="CVV"
+            >
 
         </div>
 
-    </footer>
+
+        <!-- COD DETAILS -->
+        <div
+            id="codDetails"
+            class="payment-details"
+        >
+
+            <p>
+                💵 Pay cash when your order is delivered.
+            </p>
+
+        </div>
 
 
-    <!-- ================= JAVASCRIPT ================= -->
+        <button
+            class="primary-btn"
+            onclick="placeOrder()"
+        >
+            Place Order ✅
+        </button>
 
-    <script>
+    </div>
 
-        /* CART */
+</section>
 
-        let cartCount = 0;
 
-        function addToCart() {
+<!-- ORDER SUCCESS -->
+<section
+    class="section"
+    id="successSection"
+>
 
-            cartCount++;
+    <div class="success">
 
-            document.getElementById("cartCount").innerText =
-                cartCount;
+        <h2>🎉 Order Placed Successfully!</h2>
+
+        <p>
+            Thank you for shopping with QuickKart.
+        </p>
+
+        <p style="margin-top:10px;">
+            Your order will be delivered soon 🚀
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- FOOTER -->
+<footer>
+
+    <p>
+        © 2026 QuickKart | Online Grocery Store
+    </p>
+
+</footer>
+
+
+<script>
+
+/* CART ARRAY */
+
+let cart = [];
+
+
+/* ADD TO CART */
+
+function addToCart(name, price) {
+
+    cart.push({
+        name: name,
+        price: price
+    });
+
+    document.getElementById("cartCount").innerText =
+        cart.length;
+
+    alert(name + " added to cart 🛒");
+}
+
+
+/* SHOW MENU */
+
+function showMenu() {
+
+    document
+        .getElementById("menuSection")
+        .scrollIntoView({
+            behavior: "smooth"
+        });
+
+}
+
+
+/* SHOW CART */
+
+function showCart() {
+
+    const cartSection =
+        document.getElementById("cartSection");
+
+    const cartItems =
+        document.getElementById("cartItems");
+
+    const totalPrice =
+        document.getElementById("totalPrice");
+
+
+    cartItems.innerHTML = "";
+
+    let total = 0;
+
+
+    /* EMPTY CART */
+
+    if (cart.length === 0) {
+
+        cartItems.innerHTML = `
+            <div style="
+                text-align:center;
+                padding:30px;
+            ">
+                <h3>Your Cart is Empty 🛒</h3>
+
+                <p>
+                    Please add some products first.
+                </p>
+            </div>
+        `;
+
+        totalPrice.innerText = "0";
+
+    }
+
+    /* CART PRODUCTS */
+
+    else {
+
+        cart.forEach(function(item, index) {
+
+            total += item.price;
+
+            cartItems.innerHTML += `
+
+                <div class="cart-item">
+
+                    <div>
+
+                        <strong>
+                            ${item.name}
+                        </strong>
+
+                        <br>
+
+                        <small>
+                            ₹${item.price}
+                        </small>
+
+                    </div>
+
+                    <button
+                        class="remove-btn"
+                        onclick="removeFromCart(${index})"
+                    >
+                        Remove
+                    </button>
+
+                </div>
+
+            `;
+
+        });
+
+        totalPrice.innerText = total;
+
+    }
+
+
+    cartSection.style.display = "block";
+
+    cartSection.scrollIntoView({
+        behavior: "smooth"
+    });
+
+}
+
+
+/* REMOVE FROM CART */
+
+function removeFromCart(index) {
+
+    cart.splice(index, 1);
+
+    document.getElementById("cartCount").innerText =
+        cart.length;
+
+    showCart();
+
+}
+
+
+/* CHECKOUT */
+
+function showCheckout() {
+
+    if (cart.length === 0) {
+
+        alert("Please add products to cart first 🛒");
+
+        return;
+    }
+
+
+    document.getElementById("checkoutSection")
+        .style.display = "block";
+
+
+    document.getElementById("checkoutSection")
+        .scrollIntoView({
+            behavior: "smooth"
+        });
+
+}
+
+
+/* PAYMENT */
+
+function showPayment() {
+
+    const name =
+        document.getElementById("fullName").value;
+
+    const mobile =
+        document.getElementById("mobile").value;
+
+    const address =
+        document.getElementById("address").value;
+
+
+    if (
+        name === "" ||
+        mobile === "" ||
+        address === ""
+    ) {
+
+        alert("Please fill all checkout details.");
+
+        return;
+    }
+
+
+    document.getElementById("paymentSection")
+        .style.display = "block";
+
+
+    document.getElementById("paymentSection")
+        .scrollIntoView({
+            behavior: "smooth"
+        });
+
+}
+
+
+/* PAYMENT DETAILS */
+
+function showPaymentDetails(type) {
+
+    document.getElementById("upiDetails")
+        .style.display = "none";
+
+    document.getElementById("cardDetails")
+        .style.display = "none";
+
+    document.getElementById("codDetails")
+        .style.display = "none";
+
+
+    if (type === "upi") {
+
+        document.getElementById("upiDetails")
+            .style.display = "block";
+
+    }
+
+
+    if (type === "card") {
+
+        document.getElementById("cardDetails")
+            .style.display = "block";
+
+    }
+
+
+    if (type === "cod") {
+
+        document.getElementById("codDetails")
+            .style.display = "block";
+
+    }
+
+}
+
+
+/* PLACE ORDER */
+
+function placeOrder() {
+
+    const payment =
+        document.querySelector(
+            'input[name="payment"]:checked'
+        );
+
+
+    if (!payment) {
+
+        alert("Please select a payment option.");
+
+        return;
+    }
+
+
+    if (payment.value === "upi") {
+
+        const upi =
+            document.getElementById("upiId").value;
+
+        if (upi === "") {
+
+            alert("Please enter your UPI ID.");
+
+            return;
+        }
+
+    }
+
+
+    document.getElementById("paymentSection")
+        .style.display = "none";
+
+
+    document.getElementById("cartSection")
+        .style.display = "none";
+
+
+    document.getElementById("checkoutSection")
+        .style.display = "none";
+
+
+    document.getElementById("successSection")
+        .style.display = "block";
+
+
+    document.getElementById("successSection")
+        .scrollIntoView({
+            behavior: "smooth"
+        });
+
+
+    /* CLEAR CART */
+
+    cart = [];
+
+    document.getElementById("cartCount")
+        .innerText = "0";
+
+}
+
+
+/* SEARCH PRODUCTS */
+
+function searchProducts() {
+
+    const search =
+        document.getElementById("searchInput")
+            .value
+            .toLowerCase();
+
+
+    const products =
+        document.querySelectorAll(".product");
+
+
+    products.forEach(function(product) {
+
+        const name =
+            product
+                .querySelector("h3")
+                .innerText
+                .toLowerCase();
+
+
+        if (name.includes(search)) {
+
+            product.style.display = "block";
+
+        } else {
+
+            product.style.display = "none";
 
         }
 
+    });
 
-        /* SEARCH */
+}
 
-        document
-            .getElementById("searchInput")
-            .addEventListener("input", function () {
-
-                let search =
-                    this.value.toLowerCase();
-
-                let products =
-                    document.querySelectorAll(".product");
-
-
-                products.forEach(function (product) {
-
-                    let name =
-                        product
-                        .getAttribute("data-name")
-                        .toLowerCase();
-
-
-                    if (name.includes(search)) {
-
-                        product.style.display =
-                            "block";
-
-                    } else {
-
-                        product.style.display =
-                            "none";
-
-                    }
-
-                });
-
-            });
-
-    </script>
-
+</script>
 
 </body>
-
 </html>
 ```
-

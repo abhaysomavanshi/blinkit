@@ -1,0 +1,642 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuickKart - Grocery Delivery</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            background: #f7f7f7;
+            color: #222;
+        }
+
+        /* Navbar */
+        nav {
+            height: 70px;
+            background: white;
+            display: flex;
+            align-items: center;
+            padding: 0 5%;
+            gap: 30px;
+            border-bottom: 1px solid #eee;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #f5c400;
+        }
+
+        .logo span {
+            color: #222;
+        }
+
+        .location {
+            font-size: 14px;
+            font-weight: bold;
+            min-width: 150px;
+        }
+
+        .location small {
+            display: block;
+            color: #777;
+            font-weight: normal;
+            margin-top: 4px;
+        }
+
+        .search {
+            flex: 1;
+            max-width: 600px;
+            position: relative;
+        }
+
+        .search input {
+            width: 100%;
+            padding: 14px 45px;
+            border: none;
+            background: #f2f2f2;
+            border-radius: 10px;
+            outline: none;
+            font-size: 15px;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 15px;
+            top: 13px;
+            font-size: 18px;
+        }
+
+        .login {
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .cart {
+            background: #222;
+            color: white;
+            padding: 13px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        /* Hero */
+        .hero {
+            width: 90%;
+            max-width: 1300px;
+            margin: 25px auto;
+            background: #fff3c4;
+            border-radius: 15px;
+            padding: 45px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-size: 42px;
+            margin-bottom: 15px;
+        }
+
+        .hero-text p {
+            font-size: 18px;
+            color: #555;
+            margin-bottom: 25px;
+        }
+
+        .shop-btn {
+            background: #f5c400;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .hero-icon {
+            font-size: 130px;
+        }
+
+        /* Categories */
+        .container {
+            width: 90%;
+            max-width: 1300px;
+            margin: auto;
+        }
+
+        .section-title {
+            font-size: 25px;
+            margin: 35px 0 20px;
+        }
+
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(8, 1fr);
+            gap: 15px;
+        }
+
+        .category {
+            background: white;
+            border-radius: 12px;
+            padding: 18px 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .category:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px #ddd;
+        }
+
+        .category-icon {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+
+        .category p {
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        /* Products */
+        .products {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 18px;
+        }
+
+        .product {
+            background: white;
+            border-radius: 12px;
+            padding: 15px;
+            border: 1px solid #eee;
+            transition: 0.2s;
+        }
+
+        .product:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 5px 15px #ddd;
+        }
+
+        .product-image {
+            height: 160px;
+            background: #f7f7f7;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 75px;
+            margin-bottom: 15px;
+        }
+
+        .product h3 {
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+
+        .quantity {
+            color: #777;
+            font-size: 13px;
+            margin-bottom: 15px;
+        }
+
+        .product-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .price {
+            font-weight: bold;
+        }
+
+        .add-btn {
+            border: 1px solid #f5c400;
+            background: white;
+            color: #222;
+            padding: 7px 16px;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .add-btn:hover {
+            background: #f5c400;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 60px;
+            background: #222;
+            color: white;
+            padding: 40px 5%;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        footer h2 {
+            color: #f5c400;
+            margin-bottom: 10px;
+        }
+
+        footer p {
+            color: #ccc;
+            margin: 7px 0;
+        }
+
+        .copyright {
+            margin-top: 30px;
+            text-align: center;
+            border-top: 1px solid #444;
+            padding-top: 20px;
+            color: #aaa;
+        }
+
+        /* Responsive */
+        @media (max-width: 1000px) {
+            .categories {
+                grid-template-columns: repeat(4, 1fr);
+            }
+
+            .products {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .location {
+                display: none;
+            }
+        }
+
+        @media (max-width: 650px) {
+            nav {
+                padding: 0 15px;
+                gap: 10px;
+            }
+
+            .logo {
+                font-size: 22px;
+            }
+
+            .login {
+                display: none;
+            }
+
+            .cart {
+                padding: 10px;
+            }
+
+            .hero {
+                padding: 25px;
+            }
+
+            .hero-text h1 {
+                font-size: 28px;
+            }
+
+            .hero-icon {
+                font-size: 70px;
+            }
+
+            .categories {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .products {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .product-image {
+                height: 120px;
+                font-size: 55px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav>
+        <div class="logo">Quick<span>Kart</span></div>
+
+        <div class="location">
+            📍 Deliver to
+            <small>Vaijapur, Maharashtra</small>
+        </div>
+
+        <div class="search">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="searchInput"
+                   placeholder="Search for groceries, fruits, snacks...">
+        </div>
+
+        <div class="login">Login</div>
+
+        <div class="cart">
+            🛒 Cart (<span id="cartCount">0</span>)
+        </div>
+    </nav>
+
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-text">
+            <h1>Groceries delivered fast ⚡</h1>
+            <p>Fresh groceries, snacks & daily essentials at your doorstep.</p>
+            <button class="shop-btn"
+                    onclick="document.getElementById('products').scrollIntoView()">
+                Shop Now
+            </button>
+        </div>
+
+        <div class="hero-icon">🛍️</div>
+    </section>
+
+
+    <main class="container">
+
+        <!-- Categories -->
+        <h2 class="section-title">Shop by Category</h2>
+
+        <div class="categories">
+
+            <div class="category">
+                <div class="category-icon">🍎</div>
+                <p>Fruits</p>
+            </div>
+
+            <div class="category">
+                <div class="category-icon">🥦</div>
+                <p>Vegetables</p>
+            </div>
+
+            <div class="category">
+                <div class="category-icon">🥛</div>
+                <p>Dairy</p>
+            </div>
+
+            <div class="category">
+                <div class="category-icon">🍪</div>
+                <p>Snacks</p>
+            </div>
+
+            <div class="category">
+                <div class="category-icon">🥤</div>
+                <p>Drinks</p>
+            </div>
+
+            <div class="category">
+                <div class="category-icon">🍚</div>
+                <p>Staples</p>
+            </div>
+
+            <div class="category">
+                <div class="category-icon">🧴</div>
+                <p>Personal Care</p>
+            </div>
+
+            <div class="category">
+                <div class="category-icon">🧹</div>
+                <p>Home Care</p>
+            </div>
+
+        </div>
+
+
+        <!-- Products -->
+        <h2 class="section-title" id="products">Popular Products</h2>
+
+        <div class="products" id="productList">
+
+            <div class="product" data-name="Fresh Apples">
+                <div class="product-image">🍎</div>
+                <h3>Fresh Apples</h3>
+                <div class="quantity">1 kg</div>
+
+                <div class="product-bottom">
+                    <span class="price">₹120</span>
+                    <button class="add-btn" onclick="addToCart()">
+                        ADD
+                    </button>
+                </div>
+            </div>
+
+
+            <div class="product" data-name="Banana">
+                <div class="product-image">🍌</div>
+                <h3>Fresh Banana</h3>
+                <div class="quantity">1 dozen</div>
+
+                <div class="product-bottom">
+                    <span class="price">₹60</span>
+                    <button class="add-btn" onclick="addToCart()">
+                        ADD
+                    </button>
+                </div>
+            </div>
+
+
+            <div class="product" data-name="Milk">
+                <div class="product-image">🥛</div>
+                <h3>Fresh Milk</h3>
+                <div class="quantity">1 litre</div>
+
+                <div class="product-bottom">
+                    <span class="price">₹58</span>
+                    <button class="add-btn" onclick="addToCart()">
+                        ADD
+                    </button>
+                </div>
+            </div>
+
+
+            <div class="product" data-name="Potato">
+                <div class="product-image">🥔</div>
+                <h3>Potato</h3>
+                <div class="quantity">1 kg</div>
+
+                <div class="product-bottom">
+                    <span class="price">₹40</span>
+                    <button class="add-btn" onclick="addToCart()">
+                        ADD
+                    </button>
+                </div>
+            </div>
+
+
+            <div class="product" data-name="Biscuits">
+                <div class="product-image">🍪</div>
+                <h3>Chocolate Biscuits</h3>
+                <div class="quantity">200 g</div>
+
+                <div class="product-bottom">
+                    <span class="price">₹30</span>
+                    <button class="add-btn" onclick="addToCart()">
+                        ADD
+                    </button>
+                </div>
+            </div>
+
+
+            <div class="product" data-name="Rice">
+                <div class="product-image">🍚</div>
+                <h3>Premium Rice</h3>
+                <div class="quantity">5 kg</div>
+
+                <div class="product-bottom">
+                    <span class="price">₹350</span>
+                    <button class="add-btn" onclick="addToCart()">
+                        ADD
+                    </button>
+                </div>
+            </div>
+
+
+            <div class="product" data-name="Orange Juice">
+                <div class="product-image">🧃</div>
+                <h3>Orange Juice</h3>
+                <div class="quantity">1 litre</div>
+
+                <div class="product-bottom">
+                    <span class="price">₹110</span>
+                    <button class="add-btn" onclick="addToCart()">
+                        ADD
+                    </button>
+                </div>
+            </div>
+
+
+            <div class="product" data-name="Tomato">
+                <div class="product-image">🍅</div>
+                <h3>Fresh Tomato</h3>
+                <div class="quantity">1 kg</div>
+
+                <div class="product-bottom">
+                    <span class="price">₹50</span>
+                    <button class="add-btn" onclick="addToCart()">
+                        ADD
+                    </button>
+                </div>
+            </div>
+
+
+            <div class="product" data-name="Bread">
+                <div class="product-image">🍞</div>
+                <h3>Fresh Bread</h3>
+                <div class="quantity">400 g</div>
+
+                <div class="product-bottom">
+                    <span class="price">₹45</span>
+                    <button class="add-btn" onclick="addToCart()">
+                        ADD
+                    </button>
+                </div>
+            </div>
+
+
+            <div class="product" data-name="Eggs">
+                <div class="product-image">🥚</div>
+                <h3>Farm Eggs</h3>
+                <div class="quantity">12 pieces</div>
+
+                <div class="product-bottom">
+                    <span class="price">₹90</span>
+                    <button class="add-btn" onclick="addToCart()">
+                        ADD
+                    </button>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+
+            <div>
+                <h2>QuickKart</h2>
+                <p>Fast grocery delivery</p>
+                <p>Fresh products at your doorstep.</p>
+            </div>
+
+            <div>
+                <h3>Company</h3>
+                <p>About Us</p>
+                <p>Contact</p>
+                <p>Careers</p>
+            </div>
+
+            <div>
+                <h3>Help</h3>
+                <p>Customer Support</p>
+                <p>Delivery Information</p>
+                <p>Terms & Conditions</p>
+            </div>
+
+        </div>
+
+        <div class="copyright">
+            © 2026 QuickKart. All Rights Reserved.
+        </div>
+    </footer>
+
+
+    <script>
+
+        // Cart
+        let cartCount = 0;
+
+        function addToCart() {
+            cartCount++;
+            document.getElementById("cartCount").innerText = cartCount;
+        }
+
+
+        // Product Search
+        document.getElementById("searchInput").addEventListener("input", function () {
+
+            let search = this.value.toLowerCase();
+
+            let products = document.querySelectorAll(".product");
+
+            products.forEach(function(product) {
+
+                let name = product.getAttribute("data-name").toLowerCase();
+
+                if (name.includes(search)) {
+                    product.style.display = "block";
+                } else {
+                    product.style.display = "none";
+                }
+
+            });
+
+        });
+
+    </script>
+
+</body>
+</html>
+```
